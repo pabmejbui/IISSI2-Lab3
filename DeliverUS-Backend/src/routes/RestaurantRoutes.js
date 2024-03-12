@@ -28,9 +28,9 @@ const loadFileRoutes = function (app) {
     .put(
       isLoggedIn,
       hasRole('owner'),
-      handleFilesUpload(['heroImage', 'logo'], process.env.RESTAURANTS_FOLDER),
       checkEntityExists(Restaurant, 'restaurantId'),
       RestaurantMiddleware.checkRestaurantOwnership,
+      handleFilesUpload(['heroImage', 'logo'], process.env.RESTAURANTS_FOLDER),
       RestaurantValidation.update,
       handleValidation,
       RestaurantController.update)
@@ -47,7 +47,7 @@ const loadFileRoutes = function (app) {
       isLoggedIn,
       hasRole('owner'),
       checkEntityExists(Restaurant, 'restaurantId'),
-      RestaurantController.checkRestaurantOwnership,
+      RestaurantMiddleware.checkRestaurantOwnership,
       OrderController.indexRestaurant)
 
   app.route('/restaurants/:restaurantId/products')
